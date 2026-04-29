@@ -1,4 +1,4 @@
-package com.tateishi.calendar_app;
+package com.tateishi.calendar_app.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

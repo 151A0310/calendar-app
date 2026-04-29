@@ -1,5 +1,7 @@
-package com.tateishi.calendar_app;
+package com.tateishi.calendar_app.controller;
 
+import com.tateishi.calendar_app.repository.TaskRepository;
+import com.tateishi.calendar_app.entity.Task;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
