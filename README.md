@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+## ◆ タスク管理カレンダーアプリ
+React（FullCalendar）× Spring Boot × MySQL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+このアプリは React（FullCalendar）× Spring Boot × MySQL を使用した  
+タスク管理カレンダーアプリです。
 
-## Available Scripts
+終日イベント・時間ありイベントの両方に対応し、  
+ドラッグ＆ドロップやリサイズによる日付変更も可能です。
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ◆ 主な機能
+- タスクの追加、更新、削除
+- 終日イベント
+- 時間ありイベント
+- ドラッグ＆ドロップで日付移動
+- リサイズで期間変更
+- カラータグ機能
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ◆ 技術的なこだわりポイント
 
-### `npm test`
+### 1. FullCalendar の「exclusive end」問題を完全に解決
+FullCalendar は終日イベントの end を **翌日（exclusive）** として扱うため、  
+DB の end（inclusive）とズレが発生する。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+開発中、このズレが原因で以下の問題が発生した：
+- 期間が 1 日増える  
+- 期間が 1 日減る  
+- リサイズで日数が狂う  
 
-### `npm run build`
+これを避けるために以下の対称ロジックを実装：
+- 表示時：DB end + 1 日 → exclusive に変換  
+- 保存時：exclusive end - 1 日 → inclusive に戻す  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+これにより、終日イベントのズレが完全に解消された。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2. AddTask / EditTask / Calendar のロジックを完全統一
+開発中、AddTask と EditTask のバリデーションがズレて  
+DB に不正データが入る問題があった。
 
-### `npm run eject`
+そこで以下のルールを統一：
+- 日付比較は Date 型  
+- 時間比較は normalizeTime 後  
+- 片方だけ時間入力はエラー  
+- 終日イベントは時間比較をスキップ  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+これにより、AddTask / EditTask / Calendar の仕様が完全一致し、  
+DB の整合性が保たれるようになった。
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## ◆ 使用技術
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Frontend
+- React
+- FullCalendar（dayGrid / timeGrid / interaction）
+- React Router
+- CSS Modules
 
-## Learn More
+### Backend
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- MySQL Connector
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Database
+- MySQL 8.0
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## ◆ 今後の改善予定
+- Web Push 通知機能
+- カテゴリ（タグ）機能
+- 検索・フィルター
+- スマホ UI 最適化
+- 週ビューの UI 改善
