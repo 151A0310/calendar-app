@@ -1,0 +1,71 @@
+/* ===========================
+   入力欄（InputField）
+=========================== */
+.inputField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputField label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.inputField input {
+  width: 100%;
+  padding: 10px 2px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.inputField input:focus {
+  outline: none;
+  border-color: #4A90E2;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
+}
+
+input[type="date"],
+input[type="time"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+/* ===========================
+   カラー選択（完全復元版）
+=========================== */
+.color-options {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.color {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, border 0.15s ease, background 0.15s ease;
+  box-sizing: border-box;
+}
+
+/* hover アニメーション復活 */
+.color:hover {
+  transform: scale(1.15);
+  border: 2px solid #4A90E2;
+}
+
+/* 選択時のアニメーション復活 */
+.color.selected {
+  border: 3px solid #4A90E2;
+  transform: scale(1.15);
+}

@@ -1,0 +1,49 @@
+/* FullCalendar の調整（必要な部分だけ） */
+/* ===========================
+   カレンダー画面（既存）
+=========================== */
+.fc-toolbar {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.fc-button {
+    font-size: 13px;
+    padding: 6px 10px;
+}
+
+.floatingAddBtn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background: #4A90E2;
+    color: white;
+    border-radius: 50%;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: transform 0.15s ease;
+}
+
+.floatingAddBtn:hover {
+    transform: scale(1.1);
+}
+
+.fc-view-harness {
+    padding-bottom: 80px;
+}
+
+@media (max-width: 480px) {
+    .floatingAddBtn {
+        width: 48px;
+        height: 48px;
+        bottom: 16px;
+        right: 16px;
+        font-size: 28px;
+    }
+}
