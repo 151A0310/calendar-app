@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import FormContainer from "../components/FormContainer";
 import InputField from "../components/InputField";
 import ColorPicker from "../components/ColorPicker";
+import { validateTask } from "../utils/validation";
 
 export default function EditTask({ fetchEvents }) {
   const { id } = useParams();
@@ -18,18 +19,16 @@ export default function EditTask({ fetchEvents }) {
   });
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  // JST のまま yyyy-mm-ddThh:mm に変換
   function toLocalInput(datetime) {
     if (!datetime) return "";
-
     const d = new Date(datetime.replace(" ", "T"));
     const yyyy = d.getFullYear();
     const mm = String(d.getMonth() + 1).padStart(2, "0");
     const dd = String(d.getDate()).padStart(2, "0");
     const hh = String(d.getHours()).padStart(2, "0");
     const mi = String(d.getMinutes()).padStart(2, "0");
-
     return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
   }
 
@@ -44,7 +43,6 @@ export default function EditTask({ fetchEvents }) {
         const isTimed = data.start.includes(" ");
 
         if (!isTimed) {
-          // 終日イベント
           setTask({
             title: data.title,
             start: data.start,
@@ -54,7 +52,6 @@ export default function EditTask({ fetchEvents }) {
             color: data.color
           });
         } else {
-          // 時間ありイベント
           const localStart = toLocalInput(data.start);
           const localEnd = toLocalInput(data.end);
 
@@ -70,6 +67,8 @@ export default function EditTask({ fetchEvents }) {
             color: data.color
           });
         }
+
+        setLoading(false);
       });
   }, [id]);
 
@@ -80,21 +79,20 @@ export default function EditTask({ fetchEvents }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!task.title.trim()) return setError("タイトルを入力してください");
-    if (!task.start) return setError("開始日を入力してください");
-    if (!task.end) return setError("終了日を入力してください");
-    if (task.start > task.end) return setError("開始日は終了日より前にしてください");
+    const validationError = validateTask(task);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
 
     const isTimed = task.startTime && task.endTime;
 
     let startDateTime, endDateTime;
 
     if (!isTimed) {
-      // 終日イベント
       startDateTime = task.start;
       endDateTime = task.end;
     } else {
-      // 時間ありイベント
       startDateTime = toMySQL(`${task.start}T${task.startTime}`);
       endDateTime = toMySQL(`${task.end}T${task.endTime}`);
     }
@@ -119,6 +117,8 @@ export default function EditTask({ fetchEvents }) {
       .then(() => navigate("/"));
   };
 
+  if (loading) return <p>読み込み中...</p>;
+
   return (
     <FormContainer
       title="タスク編集"
@@ -142,9 +142,9 @@ export default function EditTask({ fetchEvents }) {
 
         <InputField label="終了日" type="date" name="end" value={task.end} onChange={handleChange} />
 
-        <InputField label="開始時間" type="time" name="startTime" value={task.startTime} onChange={handleChange} />
+        <InputField label="開始時間（任意）" type="time" name="startTime" value={task.startTime} onChange={handleChange} />
 
-        <InputField label="終了時間" type="time" name="endTime" value={task.endTime} onChange={handleChange} />
+        <InputField label="終了時間（任意）" type="time" name="endTime" value={task.endTime} onChange={handleChange} />
 
         <label>タグカラー</label>
         <ColorPicker color={task.color} setColor={(c) => setTask({ ...task, color: c })} />
