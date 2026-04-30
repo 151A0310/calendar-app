@@ -23,29 +23,7 @@ const Calendar = ({ events, fetchEvents }) => {
     e.setDate(e.getDate() + 1);
     return e.toISOString().split("T")[0];
   }
-
-  //(終了日 - 開始日)+1で日数を求める
-  function calcDurationDays(start, end) {
-    const s = new Date(start);
-    const e = new Date(end);
-    return Math.ceil((e - s) / (1000 * 60 * 60 * 24)) + 1;
-  }
-
-  //JSTのままフォーマットする関数
-  function formatDateTimeLocal(date) {
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, "0");
-    const dd = String(date.getDate()).padStart(2, "0");
-    const hh = String(date.getHours()).padStart(2, "0");
-    const mi = String(date.getMinutes()).padStart(2, "0");
-    return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
-  }
-
-  //日付と時間の保存処理
-  function toMySQLDateTime(str) {
-    return str.replace("T", " ") + ":00";
-  }
-
+  
   function toISO(datetime) {
     if (!datetime) return null;
     return datetime.replace(" ", "T").slice(0, 16);
