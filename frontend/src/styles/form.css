@@ -1,0 +1,62 @@
+/* ===== form.css ===== */
+
+/* AddTask / EditTask のカード */
+.formContainer>form {
+  background: #fff;
+  padding: 24px 28px;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ボタンエリア */
+.btnArea {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* ===========================
+   ボタン（更新・戻る）
+=========================== */
+.btnArea {
+  display: flex !important;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.saveBtn,
+.backBtn {
+  width: 20% !important;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.saveBtn {
+  background: #4A90E2;
+  color: white;
+  border: none;
+}
+
+.backBtn {
+  background: #ddd;
+  color: #333;
+  border: none;
+}
+
+.deleteBtn {
+  padding: 6px 12px;
+  background: #E74C3C;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: auto !important;
+}
