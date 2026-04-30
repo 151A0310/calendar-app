@@ -7,11 +7,12 @@ import { validateTask } from "../utils/validation";
 
 export default function AddTask({ fetchEvents }) {
   const navigate = useNavigate();
-
+  const today = new Date().toISOString().split("T")[0];
+  
   const [task, setTask] = useState({
     title: "",
-    start: "",
-    end: "",
+    start: today,
+    end: today,
     startTime: "",
     endTime: "",
     color: "#4A90E2"
