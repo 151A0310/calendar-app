@@ -1,23 +1,32 @@
-export function validateTask({ title, start, end }) {
-  if (!title || title.trim() === "") {
-    return "タイトルを入力してください。";
+// utils/validation.js
+
+// 時間を "HH:MM" に揃える
+function normalizeTime(time) {
+  if (!time) return "";
+  const [h, m] = time.split(":");
+  return `${h.padStart(2, "0")}:${m.padStart(2, "0")}`;
+}
+
+export function validateTask({ title, start, end, startTime, endTime, color }) {
+  if (!title || title.trim() === "") return "タイトルを入力してください";
+
+  if (!start) return "開始日を入力してください";
+  if (!end) return "終了日を入力してください";
+
+  if (new Date(start) > new Date(end)) {
+    return "開始日は終了日より前にしてください";
   }
 
-  if (!start) {
-    return "開始日時を入力してください。";
+  if (!startTime && endTime !== "") return "終了時間を入力した場合、開始時間も入力してください";
+  if (!endTime && startTime !== "") return "開始時間を入力した場合、終了時間を入力してください";
+
+  if (startTime && endTime) {
+    const st = normalizeTime(startTime);
+    const et = normalizeTime(endTime);
+    if (st > et) return "開始時間は終了時間より前にしてください";
   }
 
-  if (!end) {
-    return "終了日時を入力してください。";
-  }
+  if (!color) return "カラーを選択してください";
 
-  // 日付の前後チェック
-  const startDate = new Date(start);
-  const endDate = new Date(end);
-
-  if (startDate > endDate) {
-    return "終了日時は開始日時より後にしてください。";
-  }
-
-  return ""; // エラーなし
+  return null;
 }
