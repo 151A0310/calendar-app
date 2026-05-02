@@ -23,7 +23,7 @@ const Calendar = ({ events, fetchEvents }) => {
     e.setDate(e.getDate() + 1);
     return e.toISOString().split("T")[0];
   }
-  
+
   function toISO(datetime) {
     if (!datetime) return null;
     return datetime.replace(" ", "T").slice(0, 16);
@@ -117,7 +117,7 @@ const Calendar = ({ events, fetchEvents }) => {
             endStr = formatLocal(end);
           }
 
-          await fetch(`http://localhost:8080/tasks/${id}`, {
+          await fetch(`https://calendar-app-gdwo.onrender.com/api/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -169,7 +169,7 @@ const Calendar = ({ events, fetchEvents }) => {
             endStr = formatLocal(end);
           }
 
-          await fetch(`http://localhost:8080/tasks/${id}`, {
+          await fetch(`https://calendar-app-gdwo.onrender.com/api/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

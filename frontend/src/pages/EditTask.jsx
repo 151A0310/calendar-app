@@ -37,7 +37,7 @@ export default function EditTask({ fetchEvents }) {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:8080/tasks/${id}`)
+    fetch(`https://calendar-app-gdwo.onrender.com/api/tasks/${id}`)
       .then(res => res.json())
       .then(data => {
         const isTimed = data.start.includes(" ");
@@ -97,7 +97,7 @@ export default function EditTask({ fetchEvents }) {
       endDateTime = toMySQL(`${task.end}T${task.endTime}`);
     }
 
-    fetch(`http://localhost:8080/tasks/${id}`, {
+    fetch(`https://calendar-app-gdwo.onrender.com/api/tasks/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -112,7 +112,7 @@ export default function EditTask({ fetchEvents }) {
   };
 
   const handleDelete = () => {
-    fetch(`http://localhost:8080/tasks/${id}`, { method: "DELETE" })
+    fetch(`https://calendar-app-gdwo.onrender.com/api/tasks/${id}`, { method: "DELETE" })
       .then(() => fetchEvents())
       .then(() => navigate("/"));
   };

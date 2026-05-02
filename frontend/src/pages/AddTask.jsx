@@ -8,7 +8,7 @@ import { validateTask } from "../utils/validation";
 export default function AddTask({ fetchEvents }) {
   const navigate = useNavigate();
   const today = new Date().toISOString().split("T")[0];
-  
+
   const [task, setTask] = useState({
     title: "",
     start: today,
@@ -49,7 +49,7 @@ export default function AddTask({ fetchEvents }) {
       endDateTime = toMySQL(`${task.end}T${task.endTime}`);
     }
 
-    fetch("http://localhost:8080/tasks", {
+    fetch("https://calendar-app-gdwo.onrender.com/api/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
