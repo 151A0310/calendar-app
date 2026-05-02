@@ -117,7 +117,7 @@ const Calendar = ({ events, fetchEvents }) => {
             endStr = formatLocal(end);
           }
 
-          await fetch(`https://calendar-app-gdwo.onrender.com/api/tasks/${id}`, {
+          await fetch(`https://calendar-app-gdwo.onrender.com/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -169,7 +169,7 @@ const Calendar = ({ events, fetchEvents }) => {
             endStr = formatLocal(end);
           }
 
-          await fetch(`https://calendar-app-gdwo.onrender.com/api/tasks/${id}`, {
+          await fetch(`https://calendar-app-gdwo.onrender.com/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

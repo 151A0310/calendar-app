@@ -14,7 +14,7 @@ function App() {
   const [events, setEvents] = useState([]);
 
   async function fetchEvents() {
-    const res = await fetch("https://calendar-app-gdwo.onrender.com/api/tasks");
+    const res = await fetch("https://calendar-app-gdwo.onrender.com/tasks");
     const data = await res.json();
     setEvents(data);
   }
