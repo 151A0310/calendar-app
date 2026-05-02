@@ -1,4 +1,4 @@
-package com.tateishi.calendar_app;
+package com.tateishi.calendar_app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
