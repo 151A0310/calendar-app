@@ -2,12 +2,13 @@ FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
-# backend ディレクトリだけをコピーする
 COPY . .
 
+# Linux で mvnw を実行できるようにする
 RUN chmod +x mvnw
 
-RUN ./mvnw clean package -DskipTests
+# Maven ビルド（jar を生成）
+RUN ./mvnw -B -DskipTests clean package
 
-# jar 名を自動で拾う
+# jar を自動検出して起動
 CMD ["sh", "-c", "java -jar target/*.jar"]
