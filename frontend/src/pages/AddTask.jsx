@@ -49,7 +49,7 @@ export default function AddTask({ fetchEvents }) {
       endDateTime = toMySQL(`${task.end}T${task.endTime}`);
     }
 
-    fetch("https://calendar-app-gdwo.onrender.com/api/tasks", {
+    fetch("https://calendar-app-gdwo.onrender.com/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
