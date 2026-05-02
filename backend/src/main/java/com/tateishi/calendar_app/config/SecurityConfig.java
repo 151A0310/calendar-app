@@ -11,10 +11,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // CSRF無効化
+                .csrf(csrf -> csrf.disable())
                 .cors(cors -> {
-                }) // CORS有効化（CorsConfigと連携）
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); // 全部許可
+                }) // ← CorsConfig を有効化するために必要
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
 
         return http.build();
     }

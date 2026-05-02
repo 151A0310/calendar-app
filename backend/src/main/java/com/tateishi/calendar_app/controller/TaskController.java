@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "https://calendar-app-offk.vercel.app")
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
