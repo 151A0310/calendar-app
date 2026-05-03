@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.security.core.Authentication;
+import com.tateishi.calendar_app.security.CustomUserDetails;
 
 @CrossOrigin(origins = {
         "http://localhost:3000",
@@ -24,20 +25,24 @@ public class TaskController {
 
     @GetMapping
     public List<Task> getAll(Authentication auth) {
-        Long userId = (Long) auth.getPrincipal();
+        CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+        Long userId = user.getId();
         return repo.findByUserId(userId);
     }
 
     @PostMapping
     public Task create(@RequestBody Task task, Authentication auth) {
-        Long userId = (Long) auth.getPrincipal();
+        CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+        Long userId = user.getId();
         task.setUserId(userId);
         return repo.save(task);
     }
 
     @PutMapping("/{id}")
     public Task update(@Valid @RequestBody Task task, @PathVariable Long id, Authentication auth) {
-        Long userId = (Long) auth.getPrincipal();
+        CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+        Long userId = user.getId();
+
         Task existing = repo.findById(id).orElseThrow();
 
         if (!existing.getUserId().equals(userId)) {
@@ -53,7 +58,9 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id, Authentication auth) {
-        Long userId = (Long) auth.getPrincipal();
+        CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+        Long userId = user.getId();
+
         Task existing = repo.findById(id).orElseThrow();
 
         if (!existing.getUserId().equals(userId)) {
@@ -65,7 +72,9 @@ public class TaskController {
 
     @GetMapping("/{id}")
     public Task getOne(@PathVariable Long id, Authentication auth) {
-        Long userId = (Long) auth.getPrincipal();
+        CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
+        Long userId = user.getId();
+
         Task task = repo.findById(id).orElseThrow();
 
         if (!task.getUserId().equals(userId)) {
@@ -74,5 +83,4 @@ public class TaskController {
 
         return task;
     }
-
 }
