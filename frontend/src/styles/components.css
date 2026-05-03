@@ -69,3 +69,25 @@ input[type="time"] {
   border: 3px solid #4A90E2;
   transform: scale(1.15);
 }
+
+.calendarHeader {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  box-sizing: border-box;
+}
+
+.logoutBtn {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logoutBtn:hover {
+  background: #e60000;
+}

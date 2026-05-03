@@ -4,6 +4,7 @@ import FormContainer from "../components/FormContainer";
 import InputField from "../components/InputField";
 import ColorPicker from "../components/ColorPicker";
 import { validateTask } from "../utils/validation";
+import authFetch from "../utils/authFetch";
 
 export default function AddTask({ fetchEvents }) {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function AddTask({ fetchEvents }) {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationError = validateTask(task);
@@ -49,18 +50,23 @@ export default function AddTask({ fetchEvents }) {
       endDateTime = toMySQL(`${task.end}T${task.endTime}`);
     }
 
-    fetch("https://calendar-app-gdwo.onrender.com/tasks", {
+    const res = await authFetch("/tasks", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: task.title,
         start: startDateTime,
         end: endDateTime,
         color: task.color
       })
-    })
-      .then(() => fetchEvents())
-      .then(() => navigate("/"));
+    });
+
+    if (!res.ok) {
+      console.error("Failed to add task");
+      return;
+    }
+
+    await fetchEvents();
+    navigate("/");
   };
 
   return (
