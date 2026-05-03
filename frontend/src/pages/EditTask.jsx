@@ -4,6 +4,7 @@ import FormContainer from "../components/FormContainer";
 import InputField from "../components/InputField";
 import ColorPicker from "../components/ColorPicker";
 import { validateTask } from "../utils/validation";
+import authFetch from "../utils/authFetch";
 
 export default function EditTask({ fetchEvents }) {
   const { id } = useParams();
@@ -36,9 +37,13 @@ export default function EditTask({ fetchEvents }) {
     return str.replace("T", " ") + ":00";
   }
 
+  // ★★★ 認証付き GET に修正 ★★★
   useEffect(() => {
-    fetch(`http://localhost:8080/tasks/${id}`)
-      .then(res => res.json())
+    authFetch(`/tasks/${id}`)
+      .then(res => {
+        if (!res.ok) throw new Error("403");
+        return res.json();
+      })
       .then(data => {
         const isTimed = data.start.includes(" ");
 
@@ -69,14 +74,19 @@ export default function EditTask({ fetchEvents }) {
         }
 
         setLoading(false);
+      })
+      .catch(() => {
+        alert("認証が切れています。ログインし直してください。");
+        navigate("/login");
       });
-  }, [id]);
+  }, [id, navigate]);
 
   const handleChange = (e) => {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  // ★★★ async + authFetch に修正 ★★★
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationError = validateTask(task);
@@ -97,24 +107,36 @@ export default function EditTask({ fetchEvents }) {
       endDateTime = toMySQL(`${task.end}T${task.endTime}`);
     }
 
-    fetch(`http://localhost:8080/tasks/${id}`, {
+    const res = await authFetch(`/tasks/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: task.title,
         start: startDateTime,
         end: endDateTime,
         color: task.color
       })
-    })
-      .then(() => fetchEvents())
-      .then(() => navigate("/"));
+    });
+
+    if (!res.ok) {
+      console.error("Failed to update task");
+      return;
+    }
+
+    await fetchEvents();
+    navigate("/");
   };
 
-  const handleDelete = () => {
-    fetch(`http://localhost:8080/tasks/${id}`, { method: "DELETE" })
-      .then(() => fetchEvents())
-      .then(() => navigate("/"));
+  // ★★★ DELETE も authFetch に修正 ★★★
+  const handleDelete = async () => {
+    const res = await authFetch(`/tasks/${id}`, { method: "DELETE" });
+
+    if (!res.ok) {
+      console.error("Failed to delete task");
+      return;
+    }
+
+    await fetchEvents();
+    navigate("/");
   };
 
   if (loading) return <p>読み込み中...</p>;
@@ -132,7 +154,6 @@ export default function EditTask({ fetchEvents }) {
         </button>
       }
     >
-
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <form onSubmit={handleSubmit}>

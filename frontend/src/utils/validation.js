@@ -1,6 +1,4 @@
-// utils/validation.js
-
-// 時間を "HH:MM" に揃える
+//時間を"HH:MM"に揃える
 function normalizeTime(time) {
   if (!time) return "";
   const [h, m] = time.split(":");
@@ -27,6 +25,22 @@ export function validateTask({ title, start, end, startTime, endTime, color }) {
   }
 
   if (!color) return "カラーを選択してください";
+
+  return null;
+}
+
+export function validateLogin({ email, password }) {
+  if (!email) {
+    return "メールアドレスを入力してください";
+  }
+
+  if (!email.includes("@")) {
+    return "メールアドレスの形式が正しくありません";
+  }
+
+  if (!password) {
+    return "パスワードを入力してください";
+  }
 
   return null;
 }

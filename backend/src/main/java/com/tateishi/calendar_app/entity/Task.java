@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 public class Task {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
@@ -21,6 +21,9 @@ public class Task {
 
     @NotBlank
     private String color;
+
+    @Column(nullable = false)
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -56,5 +59,13 @@ public class Task {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

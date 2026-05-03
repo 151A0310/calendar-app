@@ -23,14 +23,27 @@ const Calendar = ({ events, fetchEvents }) => {
     e.setDate(e.getDate() + 1);
     return e.toISOString().split("T")[0];
   }
-  
+
   function toISO(datetime) {
     if (!datetime) return null;
     return datetime.replace(" ", "T").slice(0, 16);
   }
 
   return (
-    <div>
+    <div className="calendarPage">
+
+      <div className="calendarHeader">
+        <button
+          className="logoutBtn"
+          onClick={() => {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+          }}
+        >
+          ログアウト
+        </button>
+      </div>
+
       <Link to="/add">
         <button className="floatingAddBtn">+</button>
       </Link>
@@ -119,7 +132,10 @@ const Calendar = ({ events, fetchEvents }) => {
 
           await fetch(`http://localhost:8080/tasks/${id}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
             body: JSON.stringify({
               title: info.event.title,
               start: isTimed ? startStr.replace("T", " ") + ":00" : startStr,
@@ -171,7 +187,10 @@ const Calendar = ({ events, fetchEvents }) => {
 
           await fetch(`http://localhost:8080/tasks/${id}`, {
             method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`
+            },
             body: JSON.stringify({
               title: info.event.title,
               start: isTimed ? startStr.replace("T", " ") + ":00" : startStr,
