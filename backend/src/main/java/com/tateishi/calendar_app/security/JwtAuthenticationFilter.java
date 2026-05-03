@@ -27,6 +27,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
+        if (path == null)
+            return false;
         return path.startsWith("/auth/");
     }
 
@@ -36,16 +38,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain)
             throws ServletException, IOException {
 
+        System.out.println("🔥 JwtFilter running: " + request.getRequestURI());
+
         String header = request.getHeader("Authorization");
+        System.out.println("🔑 Authorization header = " + header);
 
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
-
             Long userId = jwtUtil.extractUserId(token);
+            System.out.println("👤 Extracted userId = " + userId);
 
             if (userId != null) {
-
                 User user = userRepository.findById(userId).orElse(null);
+                System.out.println("📌 User found = " + (user != null));
 
                 if (user != null) {
                     CustomUserDetails userDetails = new CustomUserDetails(user);
