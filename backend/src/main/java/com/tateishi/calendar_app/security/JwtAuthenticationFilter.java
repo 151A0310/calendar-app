@@ -20,23 +20,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.startsWith("/auth/");
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain)
             throws ServletException, IOException {
-
-        String path = request.getRequestURI();
-
-        // ★★★ 認証不要のパスをすべてスキップ ★★★
-        if (path.startsWith("/auth") ||
-                path.startsWith("/error") ||
-                path.equals("/") ||
-                path.startsWith("/static") ||
-                path.startsWith("/favicon")) {
-
-            filterChain.doFilter(request, response);
-            return;
-        }
 
         String header = request.getHeader("Authorization");
 
