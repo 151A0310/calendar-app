@@ -61,7 +61,7 @@ export default function Login() {
                 />
 
                 <div className="btnArea">
-                    <button type="submit" className="saveBtn">ログイン</button>
+                    <button type="submit" className="btn btn-primary">ログイン</button>
                 </div>
 
                 <p>

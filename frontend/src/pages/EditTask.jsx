@@ -147,7 +147,7 @@ export default function EditTask({ fetchEvents }) {
       right={
         <button
           type="button"
-          className="deleteBtn"
+          className="btn-danger"
           onClick={handleDelete}
         >
           削除
@@ -171,8 +171,10 @@ export default function EditTask({ fetchEvents }) {
         <ColorPicker color={task.color} setColor={(c) => setTask({ ...task, color: c })} />
 
         <div className="btnArea">
-          <button type="submit" className="saveBtn">更新</button>
-          <button type="button" className="backBtn" onClick={() => navigate(-1)}>戻る</button>
+          <button type="submit" className="btn btn-primary">更新</button>
+          <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
+            戻る
+          </button>
         </div>
       </form>
     </FormContainer>

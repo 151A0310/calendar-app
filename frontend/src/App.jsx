@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Calendar from "./pages/Calendar";
 import AddTask from "./pages/AddTask";
@@ -7,6 +7,7 @@ import EditTask from "./pages/EditTask";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
+import Header from "./components/Header";
 import ProtectedRoute from "./components/ProtectedRoute";
 import authFetch from "./utils/authFetch";
 
@@ -19,6 +20,7 @@ import "./styles/modal.css";
 
 function App() {
   const [events, setEvents] = useState([]);
+  const location = useLocation();
 
   async function fetchEvents() {
     const res = await authFetch("/tasks");
@@ -32,44 +34,51 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) return; // ★ 初期表示の403を防ぐ
+    if (!token) return; //初期表示の403を防ぐ
     fetchEvents();
   }, []);
 
+  //ログイン画面と登録画面ではヘッダーを非表示にする
+  const hideHeader = location.pathname === "/login" || location.pathname === "/register";
+
   return (
-    <Routes>
-      {/* ログイン不要 */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+    <>
+      {!hideHeader && <Header />}
 
-      {/* ログイン必須 */}
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Calendar events={events} fetchEvents={fetchEvents} />
-          </ProtectedRoute>
-        }
-      />
+      <Routes>
+        {/* ログイン不要 */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-      <Route
-        path="/add"
-        element={
-          <ProtectedRoute>
-            <AddTask fetchEvents={fetchEvents} />
-          </ProtectedRoute>
-        }
-      />
+        {/* ログイン必須 */}
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Calendar events={events} fetchEvents={fetchEvents} />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route
-        path="/edit/:id"
-        element={
-          <ProtectedRoute>
-            <EditTask fetchEvents={fetchEvents} />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+        <Route
+          path="/add"
+          element={
+            <ProtectedRoute>
+              <AddTask fetchEvents={fetchEvents} />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/edit/:id"
+          element={
+            <ProtectedRoute>
+              <EditTask fetchEvents={fetchEvents} />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
   );
 }
 

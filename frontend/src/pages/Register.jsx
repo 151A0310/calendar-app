@@ -55,8 +55,10 @@ export default function Register() {
                 />
 
                 <div className="btnArea">
-                    <button type="submit" className="saveBtn">登録</button>
-                    <button type="button" className="backBtn" onClick={() => navigate(-1)}>戻る</button>
+                    <button type="submit" className="btn btn-primary">登録</button>
+                    <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
+                        戻る
+                    </button>
                 </div>
             </form>
         </FormContainer>
