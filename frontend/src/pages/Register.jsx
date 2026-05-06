@@ -29,7 +29,10 @@ export default function Register() {
                 if (!res.ok) throw new Error("登録失敗");
                 return res.text();
             })
-            .then(() => navigate("/login"))
+            .then(() => {
+                alert("登録が完了しました。ログインしてください。");
+                navigate("/login");
+            })
             .catch(() => setError("登録に失敗しました"));
 
     };
