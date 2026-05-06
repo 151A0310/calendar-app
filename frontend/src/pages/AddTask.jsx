@@ -88,8 +88,10 @@ export default function AddTask({ fetchEvents }) {
         <ColorPicker color={task.color} setColor={(c) => setTask({ ...task, color: c })} />
 
         <div className="btnArea">
-          <button type="submit" className="saveBtn">追加</button>
-          <button type="button" className="backBtn" onClick={() => navigate(-1)}>戻る</button>
+          <button type="submit" className="btn btn-primary">追加</button>
+          <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>
+            戻る
+          </button>
         </div>
       </form>
     </FormContainer>

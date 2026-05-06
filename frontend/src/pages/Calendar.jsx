@@ -30,19 +30,7 @@ const Calendar = ({ events, fetchEvents }) => {
   }
 
   return (
-    <div className="calendarPage">
-
-      <div className="calendarHeader">
-        <button
-          className="logoutBtn"
-          onClick={() => {
-            localStorage.removeItem("token");
-            window.location.href = "/login";
-          }}
-        >
-          ログアウト
-        </button>
-      </div>
+    <div className="page">
 
       <Link to="/add">
         <button className="floatingAddBtn">+</button>
@@ -55,6 +43,10 @@ const Calendar = ({ events, fetchEvents }) => {
         initialView="dayGridMonth"
         editable={true}
         selectable={true}
+
+        height="100%"
+        contentHeight="100%"
+        expandRows={true}
 
         headerToolbar={{
           left: "prev,next today",

@@ -1,5 +1,3 @@
-/* ===== form.css ===== */
-
 /* AddTask / EditTask のカード */
 .formContainer>form {
   background: #fff;
@@ -11,52 +9,63 @@
   gap: 20px;
 }
 
-/* ボタンエリア */
 .btnArea {
   display: flex;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-/* ===========================
-   ボタン（更新・戻る）
-=========================== */
-.btnArea {
-  display: flex !important;
   justify-content: center;
   gap: 12px;
   margin-top: 20px;
 }
 
-.saveBtn,
-.backBtn {
-  width: 20% !important;
+/* 通常操作ボタン（保存・戻る・追加など） */
+.btn {
+  width: 20%;
   padding: 10px 0;
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
+  border: none;
+  transition: 0.2s;
+  font-weight: 600;
 }
 
-.saveBtn {
+/* 保存・追加などのメイン操作 */
+.btn-primary {
   background: #4A90E2;
   color: white;
-  border: none;
 }
 
-.backBtn {
+.btn-primary:hover {
+  opacity: 0.85;
+}
+
+/* 戻る・キャンセルなどのサブ操作 */
+.btn-secondary {
   background: #ddd;
   color: #333;
-  border: none;
 }
 
-.deleteBtn {
-  padding: 6px 12px;
+.btn-secondary:hover {
+  background: #ccc;
+}
+
+/* 削除ボタン（特別扱い） */
+.btn-danger {
   background: #E74C3C;
   color: white;
-  border: none;
+  padding: 8px 12px;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  width: auto;
+  /* ← 特別扱い */
+}
+
+/* ログアウトボタン（ヘッダー専用） */
+.logoutBtn {
+  background: #ff4d4f;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
   cursor: pointer;
-  width: auto !important;
+  font-weight: bold;
 }

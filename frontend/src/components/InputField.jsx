@@ -5,8 +5,8 @@ function InputField({ label, type = "text", name, value, onChange }) {
       <input
         type={type}
         name={name}
-        value={value ?? ""}   // ← undefined を防ぐ
-        onChange={(e) => onChange(e)}   // ← e をそのまま渡す
+        value={value ?? ""}
+        onChange={(e) => onChange(e)}
       />
     </div>
   );
