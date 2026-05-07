@@ -46,4 +46,18 @@
         right: 16px;
         font-size: 28px;
     }
+
+    .calendar-wrapper .fc-timegrid-slot {
+        height: 45px !important;
+    }
+
+    .calendar-wrapper .fc-event-title {
+        font-size: 11px !important;
+        white-space: normal !important;
+        /* 折り返し許可 */
+    }
+
+    .calendar-wrapper .fc-event {
+        line-height: 1.1 !important;
+    }
 }
