@@ -30,7 +30,7 @@ const Calendar = ({ events, fetchEvents }) => {
   }
 
   return (
-    <div className="page">
+    <div className="calendar-wrapper page">
 
       <Link to="/add">
         <button className="floatingAddBtn">+</button>
