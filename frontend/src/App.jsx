@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 import Calendar from "./pages/Calendar";
 import AddTask from "./pages/AddTask";
@@ -49,6 +50,8 @@ function App() {
         {/* ログイン不要 */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        <Route path="/calendar" element={<Navigate to="/" replace />} />
 
         {/* ログイン必須 */}
         <Route
