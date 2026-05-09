@@ -65,9 +65,10 @@
 }
 
 .header-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #333;
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* ログアウトボタン（特別扱い） */
@@ -84,4 +85,68 @@
 
 .logoutBtn:hover {
   opacity: 0.85;
+}
+
+/* === SideMenu（ハンバーガーメニュー） === */
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+  z-index: 2000;
+  padding-top: 60px;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.menu-content a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* === Header の調整 === */
+
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* FullCalendar のヘッダーを relative に */
+.fc-toolbar.fc-header-toolbar {
+  position: relative !important;
+}
+
+/* タイトルを絶対中央に固定 */
+.fc-toolbar-chunk:nth-child(2) {
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: auto !important;
+  text-align: center !important;
+  pointer-events: none;
 }

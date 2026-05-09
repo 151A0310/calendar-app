@@ -1,24 +1,24 @@
-import React from "react";
+import React, { useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import jaLocale from "@fullcalendar/core/locales/ja";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { Link, useNavigate } from "react-router-dom";
+import authFetch from "../utils/authFetch";
 
 const Calendar = ({ events, fetchEvents }) => {
   const navigate = useNavigate();
+  const calendarRef = useRef(null);
 
   // DBのendに+1 日してFullCalendar に渡す
   function adjustEnd(start, end) {
     if (!end) return start;
 
-    // 時間ありイベントはそのまま
     if (start.includes("T") || end.includes("T")) {
       return end;
     }
 
-    // 終日：DB の end（inclusive）を +1 日して exclusive にする
     const e = new Date(end);
     e.setDate(e.getDate() + 1);
     return e.toISOString().split("T")[0];
@@ -37,12 +37,19 @@ const Calendar = ({ events, fetchEvents }) => {
       </Link>
 
       <FullCalendar
+        ref={calendarRef}
         locales={[jaLocale]}
         locale="ja"
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
         initialView="dayGridMonth"
         editable={true}
         selectable={true}
+        eventStartEditable={true}
+        eventDurationEditable={true}
+
+        slotDuration="00:15:00"
+        slotMinTime="00:00:00"
+        slotMaxTime="24:00:00"
 
         height="100%"
         contentHeight="100%"
@@ -54,13 +61,10 @@ const Calendar = ({ events, fetchEvents }) => {
           right: "dayGridMonth,timeGridWeek,timeGridDay"
         }}
 
-        //終日イベント
         events={events.map(e => {
           const startISO = toISO(e.start);
           const endISO = adjustEnd(toISO(e.start), toISO(e.end));
-
-          const isAllDay =
-            e.start.length === 10 && e.end.length === 10;
+          const isAllDay = e.start.length === 10 && e.end.length === 10;
 
           return {
             id: e.id,
@@ -72,10 +76,8 @@ const Calendar = ({ events, fetchEvents }) => {
           };
         })}
 
-        //編集画面遷移
         eventClick={(info) => {
-          const id = info.event.id;
-          navigate(`/edit/${id}`);
+          navigate(`/edit/${info.event.id}`);
         }}
 
         eventTimeFormat={{
@@ -91,76 +93,16 @@ const Calendar = ({ events, fetchEvents }) => {
           let startStr, endStr;
 
           if (!isTimed) {
-            // 終日イベント
             const startDate = new Date(info.event.startStr);
-
             const endDate = info.event.endStr
               ? new Date(info.event.endStr)
               : new Date(info.event.startStr);
 
-            // exclusive → inclusive
             endDate.setDate(endDate.getDate() - 1);
 
             startStr = startDate.toISOString().split("T")[0];
             endStr = endDate.toISOString().split("T")[0];
           } else {
-            // 時間ありイベント
-            const start = info.event.start; // Date object
-            const end = info.event.end || info.event.start;
-
-            // JST のまま yyyy-mm-ddThh:mm に変換
-            const formatLocal = (d) => {
-              const yyyy = d.getFullYear();
-              const mm = String(d.getMonth() + 1).padStart(2, "0");
-              const dd = String(d.getDate()).padStart(2, "0");
-              const hh = String(d.getHours()).padStart(2, "0");
-              const mi = String(d.getMinutes()).padStart(2, "0");
-              return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
-            };
-
-            startStr = formatLocal(start);
-            endStr = formatLocal(end);
-          }
-
-          await fetch(`https://calendar-app-gdwo.onrender.com/tasks/${id}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${localStorage.getItem("token")}`
-            },
-            body: JSON.stringify({
-              title: info.event.title,
-              start: isTimed ? startStr.replace("T", " ") + ":00" : startStr,
-              end: isTimed ? endStr.replace("T", " ") + ":00" : endStr,
-              color: info.event.backgroundColor
-            })
-          });
-
-          fetchEvents();
-        }}
-
-        //イベントの縮小、拡大時の処理
-        eventResize={async (info) => {
-          const id = info.event.id;
-          const isTimed = info.event.allDay === false;
-
-          let startStr, endStr;
-
-          if (!isTimed) {
-            // 終日イベント
-            const startDate = new Date(info.event.startStr);
-
-            const endDate = info.event.endStr
-              ? new Date(info.event.endStr)
-              : new Date(info.event.startStr);
-
-            // exclusive → inclusive
-            endDate.setDate(endDate.getDate() - 1);
-
-            startStr = startDate.toISOString().split("T")[0];
-            endStr = endDate.toISOString().split("T")[0];
-          } else {
-            // 時間ありイベント
             const start = info.event.start;
             const end = info.event.end || info.event.start;
 
@@ -177,12 +119,8 @@ const Calendar = ({ events, fetchEvents }) => {
             endStr = formatLocal(end);
           }
 
-          await fetch(`https://calendar-app-gdwo.onrender.com/tasks/${id}`, {
+          const res = await authFetch(`/tasks/${id}`, {
             method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${localStorage.getItem("token")}`
-            },
             body: JSON.stringify({
               title: info.event.title,
               start: isTimed ? startStr.replace("T", " ") + ":00" : startStr,
@@ -191,9 +129,64 @@ const Calendar = ({ events, fetchEvents }) => {
             })
           });
 
+          if (!res.ok) {
+            console.error("PUT failed");
+            return;
+          }
+
           fetchEvents();
         }}
 
+        eventResize={async (info) => {
+          const id = info.event.id;
+          const isTimed = info.event.allDay === false;
+
+          let startStr, endStr;
+
+          if (!isTimed) {
+            const startDate = new Date(info.event.startStr);
+            const endDate = info.event.endStr
+              ? new Date(info.event.endStr)
+              : new Date(info.event.startStr);
+
+            endDate.setDate(endDate.getDate() - 1);
+
+            startStr = startDate.toISOString().split("T")[0];
+            endStr = endDate.toISOString().split("T")[0];
+          } else {
+            const start = info.event.start;
+            const end = info.event.end || info.event.start;
+
+            const formatLocal = (d) => {
+              const yyyy = d.getFullYear();
+              const mm = String(d.getMonth() + 1).padStart(2, "0");
+              const dd = String(d.getDate()).padStart(2, "0");
+              const hh = String(d.getHours()).padStart(2, "0");
+              const mi = String(d.getMinutes()).padStart(2, "0");
+              return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
+            };
+
+            startStr = formatLocal(start);
+            endStr = formatLocal(end);
+          }
+
+          const res = await authFetch(`/tasks/${id}`, {
+            method: "PUT",
+            body: JSON.stringify({
+              title: info.event.title,
+              start: isTimed ? startStr.replace("T", " ") + ":00" : startStr,
+              end: isTimed ? endStr.replace("T", " ") + ":00" : endStr,
+              color: info.event.backgroundColor
+            })
+          });
+
+          if (!res.ok) {
+            console.error("PUT failed");
+            return;
+          }
+
+          fetchEvents();
+        }}
       />
     </div>
   );
