@@ -47,13 +47,13 @@ function App() {
       {!hideHeader && <Header />}
 
       <Routes>
-        {/* ログイン不要 */}
+        {/*ログイン不要*/}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         <Route path="/calendar" element={<Navigate to="/" replace />} />
 
-        {/* ログイン必須 */}
+        {/*ログイン必須*/}
         <Route
           path="/"
           element={

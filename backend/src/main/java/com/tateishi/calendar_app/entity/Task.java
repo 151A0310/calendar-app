@@ -14,11 +14,11 @@ public class Task {
     private String title;
 
     @NotBlank
-    @Column(name = "start_time") // PostgreSQL 予約語回避
+    @Column(name = "start_time")
     private String start;
 
     @NotBlank
-    @Column(name = "end_time") // PostgreSQL 予約語回避
+    @Column(name = "end_time")
     private String end;
 
     @NotBlank

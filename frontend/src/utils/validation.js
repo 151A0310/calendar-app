@@ -1,10 +1,11 @@
-//時間を"HH:MM"に揃える
+//時間をHH:MMに揃える
 function normalizeTime(time) {
   if (!time) return "";
   const [h, m] = time.split(":");
   return `${h.padStart(2, "0")}:${m.padStart(2, "0")}`;
 }
 
+//タスクのバリデーション
 export function validateTask({ title, start, end, startTime, endTime, color }) {
   if (!title || title.trim() === "") return "タイトルを入力してください";
 
@@ -29,6 +30,7 @@ export function validateTask({ title, start, end, startTime, endTime, color }) {
   return null;
 }
 
+//ログインフォームのバリデーション
 export function validateLogin({ email, password }) {
   if (!email) {
     return "メールアドレスを入力してください";

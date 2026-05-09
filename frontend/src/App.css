@@ -1,6 +1,3 @@
-/* ===========================
-   Reset / ベース
-=========================== */
 body {
     margin: 0;
     padding: 0;
@@ -8,9 +5,7 @@ body {
     background: #f7f7f7;
 }
 
-/* ===========================
-   カードレイアウト（Add / Edit）
-=========================== */
+/*カードレイアウト（Add / Edit）*/
 .formContainer {
     max-width: 800px;
     margin: 40px auto;
@@ -28,10 +23,8 @@ body {
     gap: 20px;
 }
 
-/* ===========================
-   タイトル + 削除ボタン（編集画面）
-=========================== */
-/* タイトル＋削除ボタンをカード外に配置 */
+/*タイトル + 削除ボタン（編集画面）*/
+/*タイトル＋削除ボタンをカード外に配置*/
 .formHeader {
     max-width: 800px;
     margin: 0 auto 12px auto;
@@ -65,9 +58,7 @@ body {
     width: auto !important;
 }
 
-/* ===========================
-   入力欄（InputField）
-=========================== */
+/*入力欄*/
 .inputField {
     display: flex;
     flex-direction: column;
@@ -105,9 +96,7 @@ input[type="time"] {
     border-radius: 8px;
 }
 
-/* ===========================
-   カラー選択
-=========================== */
+/*カラー選択*/
 .color-options {
     display: flex;
     gap: 12px;
@@ -134,9 +123,7 @@ input[type="time"] {
     transform: scale(1.15);
 }
 
-/* ===========================
-   ボタン（更新・戻る）
-=========================== */
+/*ボタン（更新・戻る）*/
 .btnArea {
     display: flex !important;
     justify-content: center;
@@ -165,9 +152,7 @@ input[type="time"] {
     border: none;
 }
 
-/* ===========================
-   カレンダー画面（既存）
-=========================== */
+/*カレンダー画面*/
 .fc-toolbar {
     flex-wrap: wrap;
     gap: 8px;

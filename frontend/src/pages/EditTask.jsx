@@ -37,7 +37,6 @@ export default function EditTask({ fetchEvents }) {
     return str.replace("T", " ") + ":00";
   }
 
-  // ★★★ 認証付き GET に修正 ★★★
   useEffect(() => {
     authFetch(`/tasks/${id}`)
       .then(res => {
@@ -85,7 +84,6 @@ export default function EditTask({ fetchEvents }) {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
 
-  // ★★★ async + authFetch に修正 ★★★
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -126,7 +124,6 @@ export default function EditTask({ fetchEvents }) {
     navigate("/");
   };
 
-  // ★★★ DELETE も authFetch に修正 ★★★
   const handleDelete = async () => {
     const res = await authFetch(`/tasks/${id}`, { method: "DELETE" });
 

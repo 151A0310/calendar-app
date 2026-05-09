@@ -1,6 +1,4 @@
-/* ===========================
-   入力欄（InputField）
-=========================== */
+/*入力欄*/
 .inputField {
   margin-bottom: 14px;
   display: flex;
@@ -19,9 +17,7 @@
 }
 
 
-/* ===========================
-   カラー選択（完全復元版）
-=========================== */
+/*カラー選択*/
 .color-options {
   display: flex;
   gap: 12px;
@@ -39,13 +35,13 @@
   box-sizing: border-box;
 }
 
-/* hover アニメーション復活 */
+/*アニメーション*/
 .color:hover {
   transform: scale(1.15);
   border: 2px solid #4A90E2;
 }
 
-/* 選択時のアニメーション復活 */
+/*選択時のアニメーション*/
 .color.selected {
   border: 3px solid #4A90E2;
   transform: scale(1.15);
@@ -71,7 +67,7 @@
   font-weight: bold;
 }
 
-/* ログアウトボタン（特別扱い） */
+/*ログアウトボタン*/
 .logoutBtn {
   background: #ff4d4f;
   color: #fff;
@@ -87,7 +83,7 @@
   opacity: 0.85;
 }
 
-/* === SideMenu（ハンバーガーメニュー） === */
+/*SideMenu（ハンバーガーメニュー）*/
 
 .side-menu {
   position: fixed;
@@ -129,19 +125,17 @@
   cursor: pointer;
 }
 
-/* === Header の調整 === */
-
+/*Headerの調整*/
 .menu-icon {
   font-size: 28px;
   cursor: pointer;
 }
 
-/* FullCalendar のヘッダーを relative に */
 .fc-toolbar.fc-header-toolbar {
   position: relative !important;
 }
 
-/* タイトルを絶対中央に固定 */
+/*タイトルを中央に固定*/
 .fc-toolbar-chunk:nth-child(2) {
   position: absolute !important;
   left: 50% !important;
