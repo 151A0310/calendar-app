@@ -1,7 +1,10 @@
-function InputField({ label, type = "text", name, value, onChange, ...rest }) {
+function InputField({ label, type = "text", name, value, onChange, required = false, ...rest }) {
   return (
     <div className="inputField">
-      <label>{label}</label>
+      <label>
+        {label}
+        {required && <span style={{ color: "red", marginLeft: "4px" }}>*</span>}
+      </label>
 
       {type === "textarea" ? (
         <textarea
@@ -10,7 +13,6 @@ function InputField({ label, type = "text", name, value, onChange, ...rest }) {
           onChange={onChange}
           rows={4}
           style={{ width: "100%", resize: "vertical" }}
-          maxLength={200}
           {...rest}
         />
       ) : (
