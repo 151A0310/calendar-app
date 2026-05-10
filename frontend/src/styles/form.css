@@ -1,4 +1,4 @@
-/* AddTask / EditTask のカード */
+/*追加と編集のカード */
 .formContainer>form {
   background: #fff;
   padding: 24px 28px;
@@ -16,7 +16,6 @@
   margin-top: 20px;
 }
 
-/* 通常操作ボタン（保存・戻る・追加など） */
 .btn {
   width: 20%;
   padding: 10px 0;
@@ -28,7 +27,7 @@
   font-weight: 600;
 }
 
-/* 保存・追加などのメイン操作 */
+/* 保存・追加等*/
 .btn-primary {
   background: #4A90E2;
   color: white;
@@ -38,7 +37,7 @@
   opacity: 0.85;
 }
 
-/* 戻る・キャンセルなどのサブ操作 */
+/*戻る・キャンセル*/
 .btn-secondary {
   background: #ddd;
   color: #333;
@@ -48,7 +47,7 @@
   background: #ccc;
 }
 
-/* 削除ボタン（特別扱い） */
+/*削除ボタン*/
 .btn-danger {
   background: #E74C3C;
   color: white;
@@ -56,10 +55,9 @@
   border-radius: 6px;
   font-size: 13px;
   width: auto;
-  /* ← 特別扱い */
 }
 
-/* ログアウトボタン（ヘッダー専用） */
+/*ログアウトボタン（ヘッダー）*/
 .logoutBtn {
   background: #ff4d4f;
   color: white;

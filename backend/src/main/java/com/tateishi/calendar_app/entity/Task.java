@@ -14,11 +14,11 @@ public class Task {
     private String title;
 
     @NotBlank
-    @Column(name = "start_time") // PostgreSQL 予約語回避
+    @Column(name = "start_time")
     private String start;
 
     @NotBlank
-    @Column(name = "end_time") // PostgreSQL 予約語回避
+    @Column(name = "end_time")
     private String end;
 
     @NotBlank
@@ -26,6 +26,8 @@ public class Task {
 
     @Column(nullable = false)
     private Long userId;
+
+    private String description;
 
     public Long getId() {
         return id;
@@ -69,5 +71,13 @@ public class Task {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

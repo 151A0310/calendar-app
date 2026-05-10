@@ -15,21 +15,17 @@ export default function Header() {
     return (
         <header className="header">
 
-            {/* ハンバーガーアイコン */}
             <MenuIcon
                 className="menu-icon"
                 onClick={() => setOpen(true)}
             />
 
-            {/* タイトル */}
             <h1 className="header-title">My Calendar</h1>
 
-            {/* ログアウト */}
             <button className="logoutBtn" onClick={handleLogout}>
                 ログアウト
             </button>
 
-            {/* サイドメニュー */}
             <SideMenu open={open} onClose={() => setOpen(false)} />
         </header>
     );

@@ -53,6 +53,7 @@ public class TaskController {
         existing.setStart(task.getStart());
         existing.setEnd(task.getEnd());
         existing.setColor(task.getColor());
+        existing.setDescription(task.getDescription());
         return repo.save(existing);
     }
 

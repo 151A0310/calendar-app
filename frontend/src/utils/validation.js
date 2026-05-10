@@ -1,10 +1,11 @@
-//時間を"HH:MM"に揃える
+//時間をHH:MMに揃える
 function normalizeTime(time) {
   if (!time) return "";
   const [h, m] = time.split(":");
   return `${h.padStart(2, "0")}:${m.padStart(2, "0")}`;
 }
 
+//タスクのバリデーション
 export function validateTask({ title, start, end, startTime, endTime, color }) {
   if (!title || title.trim() === "") return "タイトルを入力してください";
 
@@ -18,7 +19,7 @@ export function validateTask({ title, start, end, startTime, endTime, color }) {
   if (!startTime && endTime !== "") return "終了時間を入力した場合、開始時間も入力してください";
   if (!endTime && startTime !== "") return "開始時間を入力した場合、終了時間を入力してください";
 
-  if (startTime && endTime) {
+  if (new Date(start) === new Date(end) && startTime && endTime) {
     const st = normalizeTime(startTime);
     const et = normalizeTime(endTime);
     if (st > et) return "開始時間は終了時間より前にしてください";
@@ -29,6 +30,7 @@ export function validateTask({ title, start, end, startTime, endTime, color }) {
   return null;
 }
 
+//ログインフォームのバリデーション
 export function validateLogin({ email, password }) {
   if (!email) {
     return "メールアドレスを入力してください";

@@ -16,7 +16,8 @@ export default function EditTask({ fetchEvents }) {
     end: "",
     startTime: "",
     endTime: "",
-    color: "#4A90E2"
+    color: "#4A90E2",
+    description: ""
   });
 
   const [error, setError] = useState("");
@@ -37,7 +38,6 @@ export default function EditTask({ fetchEvents }) {
     return str.replace("T", " ") + ":00";
   }
 
-  // ★★★ 認証付き GET に修正 ★★★
   useEffect(() => {
     authFetch(`/tasks/${id}`)
       .then(res => {
@@ -54,7 +54,8 @@ export default function EditTask({ fetchEvents }) {
             end: data.end,
             startTime: "",
             endTime: "",
-            color: data.color
+            color: data.color,
+            description: data.description
           });
         } else {
           const localStart = toLocalInput(data.start);
@@ -69,7 +70,8 @@ export default function EditTask({ fetchEvents }) {
             end: eDate,
             startTime: sTime,
             endTime: eTime,
-            color: data.color
+            color: data.color,
+            description: data.description
           });
         }
 
@@ -85,7 +87,6 @@ export default function EditTask({ fetchEvents }) {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
 
-  // ★★★ async + authFetch に修正 ★★★
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -113,7 +114,8 @@ export default function EditTask({ fetchEvents }) {
         title: task.title,
         start: startDateTime,
         end: endDateTime,
-        color: task.color
+        color: task.color,
+        description: task.description
       })
     });
 
@@ -126,7 +128,6 @@ export default function EditTask({ fetchEvents }) {
     navigate("/");
   };
 
-  // ★★★ DELETE も authFetch に修正 ★★★
   const handleDelete = async () => {
     const res = await authFetch(`/tasks/${id}`, { method: "DELETE" });
 
@@ -163,9 +164,11 @@ export default function EditTask({ fetchEvents }) {
 
         <InputField label="終了日" type="date" name="end" value={task.end} onChange={handleChange} />
 
-        <InputField label="開始時間（任意）" type="time" name="startTime" value={task.startTime} onChange={handleChange} />
+        <InputField label="開始時間" type="time" name="startTime" value={task.startTime} onChange={handleChange} />
 
-        <InputField label="終了時間（任意）" type="time" name="endTime" value={task.endTime} onChange={handleChange} />
+        <InputField label="終了時間" type="time" name="endTime" value={task.endTime} onChange={handleChange} />
+
+        <InputField type="textarea" label="説明" name="description" value={task.description} onChange={handleChange} />
 
         <label>タグカラー</label>
         <ColorPicker color={task.color} setColor={(c) => setTask({ ...task, color: c })} />

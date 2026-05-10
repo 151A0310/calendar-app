@@ -18,7 +18,7 @@ code {
   flex-direction: column;
 }
 
-/* formHeader を横幅いっぱいに広げて flex を強制 */
+/*formHeaderを横幅に広げる*/
 .formHeader {
   display: flex;
   align-items: center;
@@ -28,7 +28,6 @@ code {
 
 .formHeaderRight {
   margin-left: auto;
-  /* ← これが右寄せの本命 */
   display: flex;
   align-items: center;
 }
@@ -37,4 +36,3 @@ code {
   margin: 0;
   text-align: left;
 }
-

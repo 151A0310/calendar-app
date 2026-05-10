@@ -65,6 +65,7 @@ const Calendar = ({ events, fetchEvents }) => {
           const startISO = toISO(e.start);
           const endISO = adjustEnd(toISO(e.start), toISO(e.end));
           const isAllDay = e.start.length === 10 && e.end.length === 10;
+          if (e.description === null) e.description = "";
 
           return {
             id: e.id,
@@ -72,6 +73,7 @@ const Calendar = ({ events, fetchEvents }) => {
             start: startISO,
             end: endISO,
             color: e.color,
+            description: e.description,
             allDay: isAllDay
           };
         })}

@@ -1,6 +1,4 @@
-/* ===== modal.css ===== */
-
-/* 背景（黒の半透明） */
+/*背景*/
 .modal {
   position: fixed;
   top: 0;
@@ -14,7 +12,7 @@
   z-index: 999;
 }
 
-/* モーダル本体 */
+/*モーダル本体*/
 .modal-content {
   background: #fff;
   padding: 24px;
@@ -24,13 +22,13 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* タイトル */
+/*タイトル*/
 .modal-content h2 {
   margin-bottom: 16px;
   font-size: 20px;
 }
 
-/* 入力部品の共通スタイル */
+/*入力部品の共通スタイル*/
 .text-input,
 .datetime-input,
 .color-picker {
@@ -46,7 +44,6 @@
   font-size: 14px;
 }
 
-/* 入力欄 */
 .text-input input,
 .datetime-input input,
 .color-picker input {
@@ -54,7 +51,7 @@
   font-size: 14px;
 }
 
-/* 終日チェック */
+/*終日チェック*/
 .allday-check {
   margin: 10px 0;
   display: flex;
@@ -62,7 +59,7 @@
   gap: 6px;
 }
 
-/* ボタン配置 */
+/*ボタン配置*/
 .modal-buttons {
   display: flex;
   justify-content: space-between;

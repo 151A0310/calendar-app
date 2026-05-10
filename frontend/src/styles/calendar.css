@@ -1,7 +1,4 @@
-/* FullCalendar の調整（必要な部分だけ） */
-/* ===========================
-   カレンダー画面（既存）
-=========================== */
+/*カレンダー画面*/
 .fc-toolbar {
     flex-wrap: wrap;
     gap: 8px;
@@ -54,7 +51,7 @@
     .calendar-wrapper .fc-event-title {
         font-size: 11px !important;
         white-space: normal !important;
-        /* 折り返し許可 */
+        /*折り返し許可*/
     }
 
     .calendar-wrapper .fc-event {
