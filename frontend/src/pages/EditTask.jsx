@@ -158,11 +158,11 @@ export default function EditTask({ fetchEvents }) {
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <form onSubmit={handleSubmit}>
-        <InputField label="タイトル" name="title" value={task.title} onChange={handleChange} />
+        <InputField label="タイトル" name="title" value={task.title} onChange={handleChange} required={true} />
 
-        <InputField label="開始日" type="date" name="start" value={task.start} onChange={handleChange} />
+        <InputField label="開始日" type="date" name="start" value={task.start} onChange={handleChange} required={true} />
 
-        <InputField label="終了日" type="date" name="end" value={task.end} onChange={handleChange} />
+        <InputField label="終了日" type="date" name="end" value={task.end} onChange={handleChange} required={true} />
 
         <InputField label="開始時間" type="time" name="startTime" value={task.startTime} onChange={handleChange} />
 
