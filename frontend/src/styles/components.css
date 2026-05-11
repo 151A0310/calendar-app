@@ -66,6 +66,7 @@
   text-align: center;
   font-size: 20px;
   font-weight: bold;
+  margin-left: 70px;
 }
 
 /*ログアウトボタン*/
@@ -132,16 +133,58 @@
   cursor: pointer;
 }
 
+/*FullCalendar ヘッダー全体*/
 .fc-toolbar.fc-header-toolbar {
   position: relative !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
 }
 
-/*タイトルを中央に固定*/
+/*タイトルを中央固定*/
 .fc-toolbar-chunk:nth-child(2) {
   position: absolute !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  width: auto !important;
+  width: max-content !important;
   text-align: center !important;
   pointer-events: none;
+}
+
+.fc-toolbar-chunk:first-child,
+.fc-toolbar-chunk:last-child {
+  flex-basis: 100% !important;
+  min-width: 100px;
+}
+
+
+/*スマホ用*/
+@media (max-width: 600px) {
+  .fc-toolbar.fc-header-toolbar {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  /* タイトルを通常配置に戻す */
+  .fc-toolbar-chunk:nth-child(2) {
+    position: static !important;
+    transform: none !important;
+    width: max-content !important;
+    pointer-events: auto;
+    margin-top: 4px;
+  }
+
+  /* 左右ボタンを上下に分けて配置 */
+  .fc-toolbar-chunk:first-child,
+  .fc-toolbar-chunk:last-child {
+    flex: 1 1 auto !important;
+    min-width: 80px !important;
+    overflow: hidden;
+  }
+
+  /* タイトルのフォントサイズを少し縮める */
+  .fc-toolbar-title {
+    font-size: 1.1rem !important;
+  }
 }
