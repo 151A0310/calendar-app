@@ -134,70 +134,40 @@
 }
 
 /*FullCalendar ヘッダー全体*/
-.fc-toolbar.fc-header-toolbar {
-  position: relative !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  flex-wrap: nowrap !important;
+.fc-header-toolbar {
+  display: flex;
+  align-items: center;
 }
 
-/*タイトルを中央固定*/
-.fc-toolbar-chunk:nth-child(2) {
-  position: absolute !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: max-content !important;
-  text-align: center !important;
-  pointer-events: none;
+/*タイトルを中央寄せ*/
+.fc-toolbar-title {
+  text-align: center;
+  white-space: nowrap;
 }
 
-.fc-toolbar-chunk:first-child,
-.fc-toolbar-chunk:last-child {
-  flex-basis: 100% !important;
-  min-width: 100px;
-  overflow: hidden;
-}
-
-
-/*スマホ用*/
+/*スマホ*/
 @media (max-width: 600px) {
-  .fc-toolbar.fc-header-toolbar {
-    flex-wrap: wrap !important;
-    justify-content: center !important;
+  .fc-header-toolbar {
+    flex-wrap: wrap;
   }
 
-  /* タイトルを通常配置に戻す */
-  .fc-toolbar-chunk:nth-child(2) {
-    position: static !important;
-    transform: none !important;
-    width: max-content !important;
-    pointer-events: auto;
-    margin-top: 4px;
+  .fc-toolbar-chunk {
+    flex: 1 1 100%;
+    text-align: center;
   }
 
-  /* 左右ボタンを上下に分けて配置 */
-  .fc-toolbar-chunk:first-child,
-  .fc-toolbar-chunk:last-child {
-    flex: 1 1 auto !important;
-    min-width: 80px !important;
-    overflow: hidden;
-  }
-
-  /* タイトルのフォントサイズを少し縮める */
   .fc-toolbar-title {
-    font-size: 1.1rem !important;
-    white-space: nowrap !important;
+    font-size: 1.1rem;
   }
+}
 
-  /*週ビューの日付*/
-  .fc-col-header-cell-cushion {
-    font-size: 10px !important;
-    padding: 2px 0 !important;
-  }
+/*週ビューの日付*/
+.fc-col-header-cell-cushion {
+  font-size: 10px !important;
+  padding: 2px 0 !important;
+}
 
-  /*週ビューの曜日*/
-  .fc-col-header-cell {
-    padding: 0 !important;
-  }
+/*週ビューの曜日*/
+.fc-col-header-cell {
+  padding: 0 !important;
 }
