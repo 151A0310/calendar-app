@@ -139,7 +139,7 @@
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  flex-wrap: wrap !important;
+  flex-wrap: nowrap !important;
 }
 
 /*タイトルを中央固定*/
@@ -156,6 +156,7 @@
 .fc-toolbar-chunk:last-child {
   flex-basis: 100% !important;
   min-width: 100px;
+  overflow: hidden;
 }
 
 
