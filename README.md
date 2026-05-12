@@ -7,6 +7,20 @@ React（FullCalendar）× Spring Boot × MySQL / PostgreSQL
 終日イベント・時間ありイベントの両方に対応し、  
 ドラッグ＆ドロップやリサイズによる日付変更も可能です。
 
+## ◆ デモ（GIF）
+### タスク追加
+![AddTask](https://github.com/user-attachments/assets/8e0ec631-7992-4519-819e-9c4feda4ab85)
+
+### ドラッグ＆ドロップ
+![eventDrop](https://github.com/user-attachments/assets/283a66e5-3a8a-4430-87ed-0096f1e97695)
+
+### 時間変更（リサイズ）
+![eventResize](https://github.com/user-attachments/assets/83fa53c3-624d-4d44-bc78-b1bf40a595e6)
+
+---
+## ◆ レスポンシブ対応
+カレンダー画面・タスク追加・タスク編集画面は、PC/スマホの両方で最適に表示されるようにレスポンシブデザインを採用しています。
+
 ---
 
 ## ◆ 主な機能
@@ -103,6 +117,13 @@ Spring Bootのapplication-prod.propertiesで
 - Backend：Render
 - Database：Neon（PostgreSQL）
 - URL:https://calendar-app-offk.vercel.app/
+
+### テストユーザー（ログイン情報）
+
+アプリを確認する際は、以下のテストアカウントをご利用ください。
+
+- **メールアドレス**：test@test.com  
+- **パスワード**：test
 ---
 
 ## ◆ 今後の改善予定
