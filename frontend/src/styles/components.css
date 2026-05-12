@@ -187,4 +187,15 @@
   .fc-toolbar-title {
     font-size: 1.1rem !important;
   }
+
+  /*週ビューの日付*/
+  .fc-col-header-cell-cushion {
+    font-size: 10px !important;
+    padding: 2px 0 !important;
+  }
+
+  /*週ビューの曜日*/
+  .fc-col-header-cell {
+    padding: 0 !important;
+  }
 }
