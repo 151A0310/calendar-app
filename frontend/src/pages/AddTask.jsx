@@ -8,12 +8,17 @@ import authFetch from "../utils/authFetch";
 
 export default function AddTask({ fetchEvents }) {
   const navigate = useNavigate();
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date();
+  const formattedToday =
+    today.getFullYear() +
+    "-" + String(today.getMonth() + 1).padStart(2, "0") +
+    "-" + String(today.getDate()).padStart(2, "0");
+
 
   const [task, setTask] = useState({
     title: "",
-    start: today,
-    end: today,
+    start: formattedToday,
+    end: formattedToday,
     startTime: "",
     endTime: "",
     color: "#4A90E2",
