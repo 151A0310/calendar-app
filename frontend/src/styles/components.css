@@ -187,6 +187,7 @@
   /* タイトルのフォントサイズを少し縮める */
   .fc-toolbar-title {
     font-size: 1.1rem !important;
+    white-space: nowrap !important;
   }
 
   /*週ビューの日付*/
