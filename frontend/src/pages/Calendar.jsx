@@ -127,7 +127,8 @@ const Calendar = ({ events, fetchEvents }) => {
               title: info.event.title,
               start: isTimed ? startStr.replace("T", " ") + ":00" : startStr,
               end: isTimed ? endStr.replace("T", " ") + ":00" : endStr,
-              color: info.event.backgroundColor
+              color: info.event.backgroundColor,
+              description: info.event.extendedProps.description || ""
             })
           });
 
@@ -178,7 +179,8 @@ const Calendar = ({ events, fetchEvents }) => {
               title: info.event.title,
               start: isTimed ? startStr.replace("T", " ") + ":00" : startStr,
               end: isTimed ? endStr.replace("T", " ") + ":00" : endStr,
-              color: info.event.backgroundColor
+              color: info.event.backgroundColor,
+              description: info.event.extendedProps.description || ""
             })
           });
 
