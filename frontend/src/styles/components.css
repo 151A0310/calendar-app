@@ -194,11 +194,22 @@
     font-weight: bold;
     margin-left: 70px;
   }
+
+  /*週ビューの日付*/
+  .fc-col-header-cell-cushion {
+    font-size: 8px !important;
+    padding: 2px 0 !important;
+  }
+
+  /*週ビューの曜日*/
+  .fc-col-header-cell {
+    padding: 0 !important;
+  }
 }
 
 /*週ビューの日付*/
 .fc-col-header-cell-cushion {
-  font-size: 10px !important;
+  font-size: 12px !important;
   padding: 2px 0 !important;
 }
 
