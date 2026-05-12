@@ -144,8 +144,9 @@
 
 /*タイトル中央寄せ*/
 .fc-toolbar-title {
-  flex-grow: 0 !important;
+  font-weight: bold !important;
   text-align: center !important;
+  flex-grow: 0 !important;
   white-space: nowrap !important;
 }
 
@@ -176,6 +177,14 @@
     grid-column: 2 !important;
     grid-row: 2 !important;
     text-align: right !important;
+  }
+
+  .fc-toolbar-title {
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    flex-grow: 0 !important;
+    white-space: nowrap !important;
   }
 
   .header-title {
