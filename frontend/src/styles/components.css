@@ -198,11 +198,11 @@
 
 @media (max-width: 600px) {
   .fc-timeGridWeek-view .fc-col-header-cell-cushion {
-    font-size: 10px !important;
+    font-size: 8px !important;
   }
 
   .fc-timeGridWeek-view .fc-timegrid-slot-label {
-    font-size: 10px !important;
+    font-size: 8px !important;
   }
 }
 
