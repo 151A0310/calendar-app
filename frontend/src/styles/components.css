@@ -197,19 +197,17 @@
 }
 
 @media (max-width: 600px) {
-  .fc .fc-col-header-cell .fc-col-header-cell-cushion {
-    font-size: 8px !important;
-    padding: 2px 0 !important;
+  .fc-timeGridWeek-view .fc-col-header-cell-cushion {
+    font-size: 10px !important;
+  }
+
+  .fc-timeGridWeek-view .fc-timegrid-slot-label {
+    font-size: 10px !important;
   }
 }
 
-/*週ビューの日付*/
+/*日付*/
 .fc-col-header-cell-cushion {
-  font-size: 12px !important;
+  font-size: 14px !important;
   padding: 2px 0 !important;
-}
-
-/*週ビューの曜日*/
-.fc-col-header-cell {
-  padding: 0 !important;
 }
