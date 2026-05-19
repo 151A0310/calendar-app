@@ -18,9 +18,9 @@ React（FullCalendar）× Spring Boot × MySQL / PostgreSQL
 ![eventResize](https://github.com/user-attachments/assets/83fa53c3-624d-4d44-bc78-b1bf40a595e6)
 
 ---
-## ◆ レスポンシブ対応
-カレンダー画面・タスク追加・タスク編集画面は、PC/スマホの両方で最適に表示されるようにレスポンシブデザインを採用しています。
-
+## ◆ レスポンシブ対応＆PWA対応
+- カレンダー画面・タスク追加・タスク編集画面は、PC/スマホの両方で最適に表示されるようにレスポンシブデザインを採用しています。
+- iPhone/Androidで「ホーム画面に追加」 することで、ブラウザUIのないアプリの全画面表示が可能
 ---
 
 ## ◆ 主な機能
@@ -94,6 +94,7 @@ UI と DB の状態が常に同期するように改善した。
 - React Router
 - CSS Modules
 - Create React App（react-scripts）
+- PWA 対応
 
 ### Backend
 - Spring Boot
