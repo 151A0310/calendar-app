@@ -9,10 +9,9 @@ export default function SideMenu({ open, onClose }) {
     };
 
     return (
-        <div className={`side-menu ${open ? "open" : ""}`}>
-            <div className="menu-content">
-                <button onClick={onClose} className="close-btn">×</button>
-
+        <div className={`side-menu ${open ? "open" : ""}`} onClick={onClose}>
+            {/* 背景タップで閉じる */}
+            <div className="menu-content" onClick={(e) => e.stopPropagation()}>
                 <button onClick={() => alert("近日実装予定です！")}>
                     タスク一覧
                 </button>

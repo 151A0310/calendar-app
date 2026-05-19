@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
 import SideMenu from "./SideMenu";
 
 export default function Header() {
@@ -15,10 +14,15 @@ export default function Header() {
     return (
         <header className="header">
 
-            <MenuIcon
-                className="menu-icon"
-                onClick={() => setOpen(true)}
-            />
+            {/* ハンバーガー */}
+            <div
+                className={`hamburger ${open ? "open" : ""}`}
+                onClick={() => setOpen(!open)}
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
             <h1 className="header-title">My Calendar</h1>
 
